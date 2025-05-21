@@ -1,0 +1,17 @@
+{
+
+
+    "crons": [
+
+        {
+            "path": "/api/cronjob/airdrop-snowball-usdt?tokenId=0",
+            "schedule": "* * * * *"
+        },
+        {
+            "path": "/api/cronjob/airdrop-snowball-usdt?tokenId=1",
+            "schedule": "* * * * *"
+        }
+
+    ]
+    
+}
