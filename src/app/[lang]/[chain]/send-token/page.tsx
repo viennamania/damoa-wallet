@@ -73,7 +73,7 @@ const contractAddress = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"; // USDT on
 const contractAddressArbitrum = "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"; // USDT on Arbitrum
 const contractAddressEthereum = "0xdac17f958d2ee523a2206206994597c13d831ec7"; // USDT on Ethereum
 
-const contractAddressDCTC = "0x76856Fd779AcE7C64297F9F662D3303e09dB269f"; // DCTC on Polygon
+const contractAddressKCT = "0xeb9198c8342BcB29A1Fe41d45A6CF6A3Ac568a0E"; // KCT on Polygon
 
 
 
@@ -148,14 +148,14 @@ export default function SendUsdt({ params }: any) {
       // OPTIONAL: the contract's abi
       //abi: [...],
     });
-  } else if (String(token).toLowerCase() === "dctc") {
+  } else if (String(token).toLowerCase() === "KCT") {
     contract = getContract({
       // the client you have created via `createThirdwebClient()`
       client,
       // the chain the contract is deployed on
       chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
       // the contract's address
-      address: contractAddressDCTC,
+      address: contractAddressKCT,
       // OPTIONAL: the contract's abi
       //abi: [...],
     });
@@ -303,7 +303,7 @@ export default function SendUsdt({ params }: any) {
   
       if (String(token).toLowerCase() === "usdt") {
         setBalance( Number(result) / 10 ** 6 );
-      } else if (String(token).toLowerCase() === "dctc") {
+      } else if (String(token).toLowerCase() === "KCT") {
         setBalance( Number(result) / 10 ** 18 );
       }
 
@@ -354,7 +354,7 @@ export default function SendUsdt({ params }: any) {
         const contract = getContract({
           client,
           chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
-          address: contractAddressDCTC,
+          address: contractAddressKCT,
         });
         const result = await balanceOf({
           contract : contract as any,
@@ -362,7 +362,7 @@ export default function SendUsdt({ params }: any) {
         });
         if (!result) return;
         setSwapTokenBalance( Number(result) / 10 ** 18 );
-      } else if (token === "DCTC") {
+      } else if (token === "KCT") {
         const contract = getContract({
           client,
           chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
@@ -707,7 +707,7 @@ export default function SendUsdt({ params }: any) {
 
           if (String(token).toLowerCase() === "usdt") {
           setBalance( Number(result) / 10 ** 6 );
-          } else if (String(token).toLowerCase() === "dctc") {
+          } else if (String(token).toLowerCase() === "KCT") {
             setBalance( Number(result) / 10 ** 18 );
           }
 
@@ -808,11 +808,11 @@ export default function SendUsdt({ params }: any) {
 
   // 0xef236138f40fadCac5Af0E01bB51612ad116C91f
   // usdt balance
-  // dctc balance
+  // KCT balance
   const swapPoolAddress = "0xef236138f40fadCac5Af0E01bB51612ad116C91f";
 
   const [swapPoolUsdtBalance, setSwapPoolUsdtBalance] = useState(0);
-  const [swapPoolDctcBalance, setSwapPoolDctcBalance] = useState(0);
+  const [swapPoolKCTBalance, setSwapPoolKCTBalance] = useState(0);
   useEffect(() => {
     const getSwapPoolBalance = async () => {
 
@@ -822,10 +822,10 @@ export default function SendUsdt({ params }: any) {
         address: contractAddress,
       });
 
-      const contractDctc = getContract({
+      const contractKCT = getContract({
         client,
         chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
-        address: contractAddressDCTC,
+        address: contractAddressKCT,
       });
 
       const usdtBalance = await balanceOf({
@@ -835,12 +835,12 @@ export default function SendUsdt({ params }: any) {
 
       setSwapPoolUsdtBalance(Number(usdtBalance) / 10 ** 6);
 
-      const dctcBalance = await balanceOf({
-        contract: contractDctc as any,
+      const KCTBalance = await balanceOf({
+        contract: contractKCT as any,
         address: swapPoolAddress,
       });
 
-      setSwapPoolDctcBalance(Number(dctcBalance) / 10 ** 18);
+      setSwapPoolKCTBalance(Number(KCTBalance) / 10 ** 18);
 
     };
 
@@ -849,7 +849,7 @@ export default function SendUsdt({ params }: any) {
   }, [address, params.chain]);
 
   console.log("swapPoolUsdtBalance", swapPoolUsdtBalance);
-  console.log("swapPoolDctcBalance", swapPoolDctcBalance);
+  console.log("swapPoolKCTBalance", swapPoolKCTBalance);
 
 
 
@@ -879,12 +879,12 @@ export default function SendUsdt({ params }: any) {
       return;
     }
 
-    if (token === "USDT" && swapAmount > swapPoolDctcBalance) {
-      toast.error("스왑 풀에 DCTC 잔액이 부족합니다.");
+    if (token === "USDT" && swapAmount > swapPoolKCTBalance) {
+      toast.error("스왑 풀에 KCT 잔액이 부족합니다.");
       return;
     }
 
-    if (token === "DCTC" && swapAmount > swapPoolUsdtBalance) {
+    if (token === "KCT" && swapAmount > swapPoolUsdtBalance) {
       toast.error("스왑 풀에 USDT 잔액이 부족합니다.");
       return;
     }
@@ -895,7 +895,7 @@ export default function SendUsdt({ params }: any) {
 
     try {
 
-      // if swap USDT to DCTC
+      // if swap USDT to KCT
       // swapAmount is USDT amount
       // send swapAmount USDT to swap pool address
 
@@ -920,9 +920,9 @@ export default function SendUsdt({ params }: any) {
         if (transactionHash) {
           //toast.success(USDT_sent_successfully);
 
-          // api call to send swapAmount DCTC to user wallet address
+          // api call to send swapAmount KCT to user wallet address
 
-          await fetch('/api/swap/sendDctc', {
+          await fetch('/api/swap/sendKCT', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -942,17 +942,17 @@ export default function SendUsdt({ params }: any) {
           // refresh swap pool balance
 
           if (token === "USDT") {
-            const contractDctc = getContract({
+            const contractKCT = getContract({
               client,
               chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
-              address: contractAddressDCTC,
+              address: contractAddressKCT,
             });
-            const dctcBalance = await balanceOf({
-              contract: contractDctc as any,
+            const KCTBalance = await balanceOf({
+              contract: contractKCT as any,
               address: swapPoolAddress,
             });
-            setSwapPoolDctcBalance(Number(dctcBalance) / 10 ** 18);
-          } else if (token === "DCTC") {
+            setSwapPoolKCTBalance(Number(KCTBalance) / 10 ** 18);
+          } else if (token === "KCT") {
             const contractUsdt = getContract({
               client,
               chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
@@ -978,15 +978,15 @@ export default function SendUsdt({ params }: any) {
           toast.error("스왑 실패");
         }
 
-      } else if (token === "DCTC") {
-        const contractDctc = getContract({
+      } else if (token === "KCT") {
+        const contractKCT = getContract({
           client,
           chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
-          address: contractAddressDCTC,
+          address: contractAddressKCT,
         });
 
         const transaction = transfer({
-          contract: contractDctc as any,
+          contract: contractKCT as any,
           to: swapPoolAddress,
           amount: swapAmount,
         });
@@ -1125,7 +1125,7 @@ export default function SendUsdt({ params }: any) {
               connectModal={{
                 size: "wide", 
                 //size: "compact",
-                titleIcon: "https://uma.tips/icon-snowball.png",                           
+                titleIcon: "https://uma.tips/icon-kcbc.jpeg",                           
                 showThirdwebBranding: false,
               }}
 
@@ -1713,8 +1713,8 @@ export default function SendUsdt({ params }: any) {
 
 
             {/* select swap */}
-            {/* dctc -> usdt */}
-            {/* usdt -> dctc */}
+            {/* KCT -> usdt */}
+            {/* usdt -> KCT */}
             {/* input 스왑 수량 */}
             {
               address
@@ -1765,7 +1765,7 @@ export default function SendUsdt({ params }: any) {
 
                     <div className='flex flex-row gap-2 items-center justify-start'>
                       <Image
-                        src="/token-dctc-icon.png"
+                        src="/token-KCT-icon.png"
                         alt="token"
                         width={35}
                         height={35}
@@ -1780,13 +1780,13 @@ export default function SendUsdt({ params }: any) {
                         {Number(swapTokenBalance).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
 
                       </span>
-                      <span className="text-lg">DCTC</span>
+                      <span className="text-lg">KCT</span>
                     </div>
                   </div>
 
                 )}
 
-                {token === "DCTC" && (
+                {token === "KCT" && (
                   <div className="w-full flex flex-row gap-2 items-center justify-between bg-white border border-gray-300 rounded-lg p-4">
 
                     <div className='flex flex-row gap-2 items-center justify-start'>
@@ -1828,7 +1828,7 @@ export default function SendUsdt({ params }: any) {
                       ">
                         {/*Buy_Description*/}
                         {token === "USDT" ? "스왑할 USDT 수량을 입력하세요."
-                        : "스왑할 DCTC 수량을 입력하세요."
+                        : "스왑할 KCT 수량을 입력하세요."
                         }
                       </div>
                     </div>
@@ -1854,7 +1854,7 @@ export default function SendUsdt({ params }: any) {
                             setSwapAmount(e.target.value as any),
 
                             // if swapAmount is USDT, set swapAmountTo to swapAmount * 10.0
-                            // if swapAmount is DCTC, set swapAmountTo to swapAmount * 0.1
+                            // if swapAmount is KCT, set swapAmountTo to swapAmount * 0.1
 
                             setSwapAmountTo(
                               token === "USDT" ? Number(e.target.value) * 10.0 : Number(e.target.value) * 0.1
@@ -1887,7 +1887,7 @@ export default function SendUsdt({ params }: any) {
                         <div className='w-full flex flex-row gap-5 items-center justify-between'>
                           <div className='flex flex-row gap-2 items-center justify-start'>
                             <Image
-                              src="/token-dctc-icon.png"
+                              src="/token-KCT-icon.png"
                               alt="token"
                               width={35}
                               height={35}
@@ -1895,7 +1895,7 @@ export default function SendUsdt({ params }: any) {
                             />
 
                             <span className="text-lg font-semibold text-gray-200">
-                              {swapPoolDctcBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} DCTC
+                              {swapPoolKCTBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} KCT
                             </span>
                           </div>
                           <div className="text-sm text-gray-400">
@@ -1933,14 +1933,14 @@ export default function SendUsdt({ params }: any) {
                           <div className="text-sm
                             text-white
                           ">
-                            {token === "USDT" ? "받게될 DCTC 수량"
+                            {token === "USDT" ? "받게될 KCT 수량"
                             : "받게될 USDT 수량"
                             }
                           </div>
                         </div>
                         <div className="text-2xl font-semibold text-gray-200">
                           {swapAmountTo.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                          {token === "USDT" ? " DCTC"
+                          {token === "USDT" ? " KCT"
                           : " USDT"
                           }
                         </div>
@@ -2106,7 +2106,7 @@ function Header(
           >            
               <div className="flex flex-row gap-2 items-center">
                   <Image
-                  src="/icon-snowball.png"
+                  src="/icon-kcbc.jpeg"
                   alt="Circle Logo"
                   width={35}
                   height={35}

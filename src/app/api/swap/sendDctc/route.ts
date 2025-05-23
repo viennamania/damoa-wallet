@@ -73,8 +73,8 @@ import { token } from "thirdweb/extensions/vote";
 ////const chain = polygon;
 
 
-// DCTC Token (DCTC)
-const tokenContractAddressDCTC = '0x76856Fd779AcE7C64297F9F662D3303e09dB269f';
+// KCT Token (KCT)
+const tokenContractAddressKCT = '0xeb9198c8342BcB29A1Fe41d45A6CF6A3Ac568a0E';
 
 
 
@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
       {
         client: client,
         chain: polygon,
-        address: tokenContractAddressDCTC,
+        address: tokenContractAddressKCT,
       }
     );
 

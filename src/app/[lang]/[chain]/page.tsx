@@ -156,7 +156,7 @@ const contractAddressEthereum = "0xdac17f958d2ee523a2206206994597c13d831ec7"; //
 
 
 
-const contractAddressDCTC = "0x76856Fd779AcE7C64297F9F662D3303e09dB269f"; // DCTC on Polygon
+const contractAddressKCT = "0xeb9198c8342BcB29A1Fe41d45A6CF6A3Ac568a0E"; // KCT on Polygon
 
 
 const erc1155ContractAddress = "0x796f8867E6D474C1d63e4D7ea5f52B48E4bA83D6";
@@ -238,13 +238,13 @@ function IndexPage(
 
 
 
-  const contractDCTC = getContract({
+  const contractKCT = getContract({
     // the client you have created via `createThirdwebClient()`
     client,
     // the chain the contract is deployed on
     chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
     // the contract's address
-    address: contractAddressDCTC,
+    address: contractAddressKCT,
   });
 
 
@@ -956,27 +956,27 @@ function IndexPage(
 
 
 
-  // dctc balance
-  const [dctcBalance, setDctcBalance] = useState(0);
+  // KCT balance
+  const [KCTBalance, setKCTBalance] = useState(0);
   useEffect(() => {
     
-      const getDctcBalance = async () => {
+      const getKCTBalance = async () => {
 
         const balance = await balanceOf({
-          contract: contractDCTC,
+          contract: contractKCT,
           address: address,
         });
 
-        setDctcBalance(Number(balance) / 10 ** 18);
+        setKCTBalance(Number(balance) / 10 ** 18);
 
       };
 
-      address && contractDCTC && getDctcBalance();
+      address && contractKCT && getKCTBalance();
 
       // timer
       
       const interval = setInterval(() => {
-        address && contractDCTC && getDctcBalance();
+        address && contractKCT && getKCTBalance();
       }, 10000);
 
       return () => clearInterval(interval);
@@ -984,7 +984,7 @@ function IndexPage(
   } , [address]);
 
   //console.log("address", address);
-  //console.log("contractDCTC", contractDCTC);
+  //console.log("contractKCT", contractKCT);
 
 
 
@@ -1122,7 +1122,7 @@ function IndexPage(
             <div className="w-full flex flex-row gap-2 justify-start items-center">
               
               <Image
-                src="/icon-snowball.png"
+                src="/icon-kcbc.jpeg"
                 alt="Snowball"
                 width={50}
                 height={50}
@@ -1145,7 +1145,7 @@ function IndexPage(
               </div>
 
               <Image
-                src="/logo-snowball.png"
+                src="/logo-kcbc.jpeg"
                 alt="Snowball"
                 width={120}
                 height={120}
@@ -1342,7 +1342,7 @@ function IndexPage(
                 mt-16
                 w-full flex flex-col justify-center items-center gap-2 mb-5">
                 <Image
-                  src="/icon-snowball.png"
+                  src="/icon-kcbc.jpeg"
                   alt="Snowball"
                   width={200}
                   height={200}
@@ -1407,7 +1407,7 @@ function IndexPage(
               connectModal={{
                 size: "wide", 
                 //size: "compact",
-                titleIcon: "https://uma.tips/icon-snowball.png",                           
+                titleIcon: "https://uma.tips/icon-kcbc.jpeg",                           
                 showThirdwebBranding: false,
               }}
 
@@ -1580,35 +1580,35 @@ function IndexPage(
 
 
 
-              {/* dctc balance */}
+              {/* KCT balance */}
               <div className="w-full flex flex-row gap-2 justify-between items-center p-2
                 border-b border-gray-200
                 ">
-                {/* dctc logo */}
+                {/* KCT logo */}
                 <Image
-                  src="/logo-dctc.png"
-                  alt="DCTC"
+                  src="/logo-KCT.png"
+                  alt="KCT"
                   width={35}
                   height={35}
                   className="rounded-full w-8 h-8 xl:w-10 xl:h-10"
                 />
                 <span className="text-sm md:text-xl font-bold text-gray-600">
-                  DCTC
+                  KCT
                 </span>
                 <div className="w-full text-sm font-bold text-zinc-800 text-right">
-                  {Number(dctcBalance).toFixed(2)}
+                  {Number(KCTBalance).toFixed(2)}
                 </div>
                 <p className="w-12 text-sm text-gray-800 font-bold">
-                  DCTC
+                  KCT
                 </p>
                 <button
                   onClick={() => {
                     params.chain === "tron" ?
                     router.push(
-                      "/" + params.lang + "/" + params.chain + "/send-tron-token/?token=DCTC"
+                      "/" + params.lang + "/" + params.chain + "/send-tron-token/?token=KCT"
                     ) :
                     router.push(
-                      "/" + params.lang + "/" + params.chain + "/send-token/?wallet=" + wallet + "&token=DCTC"
+                      "/" + params.lang + "/" + params.chain + "/send-token/?wallet=" + wallet + "&token=KCT"
                       + "&agent=" + agent + "&tokenId=" + agentNumber
                     );
                   }}
@@ -2156,7 +2156,7 @@ function Header(
         {/* logo */}
         <div className="flex flex-row gap-2 items-center">
           <Image
-            src="/icon-snowball.png"
+            src="/icon-kcbc.jpeg"
             alt="Snowball"
             width={35}
             height={35}

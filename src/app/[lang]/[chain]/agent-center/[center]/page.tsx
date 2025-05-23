@@ -2161,7 +2161,7 @@ export default function CenterPage({ params }: any) {
                                     }}
                                     connectModal={{
                                         size: "wide", 
-                                        titleIcon: "https://ppump.me/icon-snowball.png",                           
+                                        titleIcon: "https://ppump.me/icon-kcbc.jpeg",                           
                                         showThirdwebBranding: false,
 
                                     }}

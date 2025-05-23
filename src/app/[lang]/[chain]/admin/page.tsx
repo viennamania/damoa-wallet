@@ -74,7 +74,7 @@ const wallets = [
 
 const contractAddress = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"; // USDT on Polygon
 
-const contractAddressDCTC = "0x76856Fd779AcE7C64297F9F662D3303e09dB269f"; // DCTC on Polygon
+const contractAddressKCT = "0xeb9198c8342BcB29A1Fe41d45A6CF6A3Ac568a0E"; // KCT on Polygon
 
 
 const claimWalletAddress = "0x35C482f619D3072c0fd6891E249f8BeCCB4e2FCb"; // claim wallet address
@@ -106,10 +106,10 @@ function HomeContent() {
     address: contractAddress,
   });
 
-  const contractDCTC = getContract({
+  const contractKCT = getContract({
     client,
     chain: polygon,
-    address: contractAddressDCTC,
+    address: contractAddressKCT,
   });
 
 
@@ -262,7 +262,7 @@ function HomeContent() {
 
 
   const [userBalanceUsdt, setUserBalanceUsdt] = useState(0);
-  const [userBalanceDctc, setUserBalanceDctc] = useState(0);
+  const [userBalanceKCT, setUserBalanceKCT] = useState(0);
 
 
   useEffect(() => {
@@ -395,19 +395,19 @@ function HomeContent() {
       }
 
 
-      // get dctc balance
-      const fetchUserBalanceDctc = async () => {
+      // get KCT balance
+      const fetchUserBalanceKCT = async () => {
 
         if (!selectUser) {
           return;
         }
 
         const result2 = await balanceOf({
-          contract: contractDCTC,
+          contract: contractKCT,
           address: selectUser,
         });
 
-        setUserBalanceDctc( Number(result2) / 10 ** 18 );
+        setUserBalanceKCT( Number(result2) / 10 ** 18 );
 
       }
 
@@ -424,7 +424,7 @@ function HomeContent() {
         //fetchApplication();
 
         fetchUserBalanceUsdt();
-        fetchUserBalanceDctc();
+        fetchUserBalanceKCT();
 
       }
 
@@ -780,7 +780,7 @@ function HomeContent() {
                     connectModal={{
                         size: "wide", 
                         //size: "compact",
-                        titleIcon: "https://uma.tips/icon-snowball.png",                           
+                        titleIcon: "https://uma.tips/icon-kcbc.jpeg",                           
                         showThirdwebBranding: false,
                     }}
         
@@ -1334,7 +1334,7 @@ function HomeContent() {
 
                     <div className="w-full flex flex-col gap-2 items-start justify-between">
 
-                        {/* USDT balance, DCTC balance */}
+                        {/* USDT balance, KCT balance */}
                         <div className="w-full flex flex-col gap-2 items-start justify-start">
                           <div className="flex flex-row gap-2 items-center justify-start">
                             <span className="text-sm text-gray-800 font-semibold">
@@ -1351,12 +1351,12 @@ function HomeContent() {
 
                           <div className="flex flex-row gap-2 items-center justify-start">
                             <span className="text-sm text-gray-800 font-semibold">
-                                DCTC 잔고
+                                KCT 잔고
                             </span>
                             <span className="text-lg text-green-500 font-semibold bg-green-100 p-2 rounded">
                               {
-                              userBalanceDctc
-                                ? Number(userBalanceDctc).toLocaleString()
+                              userBalanceKCT
+                                ? Number(userBalanceKCT).toLocaleString()
                                 : "0.00"
 
                               }

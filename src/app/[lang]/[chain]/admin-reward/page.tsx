@@ -736,7 +736,7 @@ function IndexPage(
               connectModal={{
                 size: "wide", 
                 //size: "compact",
-                titleIcon: "https://uma.tips/icon-snowball.png",                           
+                titleIcon: "https://uma.tips/icon-kcbc.jpeg",                           
                 showThirdwebBranding: false,
               }}
 
