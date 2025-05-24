@@ -663,7 +663,7 @@ function IndexPage(
               connectModal={{
                 size: "wide", 
                 //size: "compact",
-                titleIcon: "https://uma.tips/icon-kcbc.jpeg",                           
+                titleIcon: "https://damoa-wallet.vercel.app/icon-kcbc.jpeg",                           
                 showThirdwebBranding: false,
               }}
 

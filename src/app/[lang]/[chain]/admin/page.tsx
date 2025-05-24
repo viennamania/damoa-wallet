@@ -780,7 +780,7 @@ function HomeContent() {
                     connectModal={{
                         size: "wide", 
                         //size: "compact",
-                        titleIcon: "https://uma.tips/icon-kcbc.jpeg",                           
+                        titleIcon: "https://damoa-wallet.vercel.app/icon-kcbc.jpeg",                           
                         showThirdwebBranding: false,
                     }}
         
@@ -1204,7 +1204,7 @@ function HomeContent() {
                                         <Button
                                           onClick={() => {
                                             navigator.clipboard.writeText(
-                                              "https://uma.tips/kr/polygon/?start=" + user?.start
+                                              "https://damoa-wallet.vercel.app/kr/polygon/?start=" + user?.start
                                             );
                                             alert(`${user?.start} 복사되었습니다.`);
                                           }}
@@ -1293,10 +1293,10 @@ function HomeContent() {
                                       <Button
                                         onClick={() => {
                                           //(window as any).Telegram.WebApp.openLink(
-                                            "https://uma.tips/kr/polygon/admin/" + user?.walletAddress
+                                            "https://damoa-wallet.vercel.app/kr/polygon/admin/" + user?.walletAddress
                                           //);
                                           window.open(
-                                            "https://uma.tips/kr/polygon/admin/" + user?.walletAddress
+                                            "https://damoa-wallet.vercel.app/kr/polygon/admin/" + user?.walletAddress
                                           );
                                         }}
                                         className="
@@ -1441,7 +1441,7 @@ function HomeContent() {
                                       <Button
                                         onClick={() => {
                                           navigator.clipboard.writeText(
-                                            "https://uma.tips/" + "?start=" + nft.contract.address + "_" + nft.tokenId
+                                            "https://damoa-wallet.vercel.app/" + "?start=" + nft.contract.address + "_" + nft.tokenId
                                           );
                                           alert(`레퍼럴 링크 복사되었습니다.`);
                                         }}

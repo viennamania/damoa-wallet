@@ -1558,7 +1558,7 @@ function AgentPage(
                             connectModal={{
                                 size: "wide", 
                                 //size: "compact",
-                                titleIcon: "https://uma.tips/icon-kcbc.jpeg",                           
+                                titleIcon: "https://damoa-wallet.vercel.app/icon-kcbc.jpeg",                           
                                 showThirdwebBranding: false,
                             }}
                 
@@ -2277,7 +2277,7 @@ function AgentPage(
             <div className="w-full fixed bottom-0 left-0 right-0 items-center justify-center">
 
 
-              <div className="w-full grid grid-cols-4 gap-0 justify-center items-center p-0
+              <div className="w-full grid grid-cols-3 gap-0 justify-center items-center p-0
                 bg-zinc-100 rounded-lg text-center
               ">
 
@@ -2312,6 +2312,7 @@ function AgentPage(
                 </button>
 
                 {/* NFT 상점 */}
+                {/*}
                 <button
                   onClick={() => {
                     router.push(
@@ -2337,12 +2338,15 @@ function AgentPage(
                     NFT 상점
                   </p>
                 </button>
+                */}
+
+                {/* NFT 상점 */}
 
                 {/* 친구 초대 */}
                 <button
                   onClick={() => {
                     router.push(
-                      "/" + params.lang + "/" + params.chain + "/affiliation-snowball"
+                      "/" + params.lang + "/" + params.chain + "/affiliation-kcbc"
                         + "?start=" + start
                     );
                   }}

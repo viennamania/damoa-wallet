@@ -1167,16 +1167,8 @@ function AgentPage(
         bg-[#E7EDF1]
         ">
 
-        {/*
-        <main
-            className="p-4 pb-28 min-h-[100vh] flex items-start justify-center container max-w-screen-lg mx-auto"
 
-        >
-        */}
-
-
-
-            <div className="py-0 w-full">
+            <div className=" py-0 w-full">
 
                 {/*}
                 <AutoConnect
@@ -1186,8 +1178,42 @@ function AgentPage(
                 />
                 */}
 
+                {/* 카카오톡 친구초대 */}
+                <div className="w-full flex flex-col gap-2 items-start justify-start p-2">
+                    
+                    <div className="w-full flex flex-row items-center justify-start gap-2">
+                        <Image
+                            src="/logo-kakao.png"
+                            alt="KakaoTalk"
+                            width={30}
+                            height={30}
+                            className="rounded-lg"
+                        />
+                        <h2 className="text-sm md:text-lg font-semibold text-zinc-800">
+                            카카오톡 친구초대
+                        </h2>
+                    </div>
+
+                    <div className="w-full flex flex-col gap-2 items-start justify-start p-2">
+
+                        <span className="text-sm md:text-lg font-semibold text-zinc-800">
+                            {nickname}님을 초대합니다.
+                        </span>
+
+                        <button
+                            onClick={() => {
+                                window.open('https://open.kakao.com/o/gv1x3c8d');
+                            }}
+                            className="w-full bg-[#3167b4] text-white px-4 py-2 rounded-lg hover:bg-[#3167b4]"
+                        >
+                            카카오톡 친구초대하기
+                        </button>
+
+                    </div>
+                </div>
+
         
-                <div className="flex flex-col items-start justify-center gap-2">
+                <div className="hidden flex-col items-start justify-center gap-2">
 
                     
                     {!address && (

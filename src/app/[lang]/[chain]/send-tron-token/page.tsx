@@ -957,7 +957,7 @@ useEffect(() => {
                     }}
                     connectModal={{
                       size: "wide", 
-                      titleIcon: "https://uma.tips/icon-kcbc.jpeg",                           
+                      titleIcon: "https://damoa-wallet.vercel.app/icon-kcbc.jpeg",                           
                       showThirdwebBranding: false,
 
                     }}

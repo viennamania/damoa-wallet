@@ -1111,52 +1111,6 @@ function IndexPage(
 
 
 
-        {/* header */}
-        {/* SNOWBALL */}
-        {address && (
-          <div className="w-full flex flex-col gap-2 justify-start items-center
-            pl-5 pr-5 pt-5 pb-0
-            bg-zinc-200
-            ">
-
-            <div className="w-full flex flex-row gap-2 justify-start items-center">
-              
-              <Image
-                src="/icon-kcbc.jpeg"
-                alt="Snowball"
-                width={50}
-                height={50}
-                className="rounded-lg w-10 h-10"
-              />
-              
-              <span className="text-lg md:text-xl font-bold text-zinc-500">
-                SNOWBALL
-              </span>
-            </div>
-
-            <div className="w-full flex flex-row gap-2 justify-between items-center">
-              <div className="w-full flex flex-col justify-start items-start">
-                <span className="text-lg md:text-lg font-bold text-zinc-500">
-                  Let Your Money
-                </span>
-                <span className="text-lg md:text-lg font-bold text-zinc-500">
-                  Roll And Grow
-                </span>
-              </div>
-
-              <Image
-                src="/logo-kcbc.jpeg"
-                alt="Snowball"
-                width={120}
-                height={120}
-                className="rounded-lg"
-              />
-
-            </div>
-
-          </div>
-
-        )}
 
 
 
@@ -1327,14 +1281,6 @@ function IndexPage(
         {!address && (
           <div className="mt-5 w-full flex flex-col justify-center items-center gap-2 mb-5">
               
-              <div className="w-full flex flex-col justify-start items-start gap-0 mb-5">
-                <span className="text-lg md:text-xl font-bold text-zinc-600">
-                  {description}
-                </span>
-                <span className="text-lg md:text-xl font-bold text-zinc-600">
-                  {title}
-                </span>
-              </div>
 
 
               {/* logo */}
@@ -1346,7 +1292,7 @@ function IndexPage(
                   alt="Snowball"
                   width={200}
                   height={200}
-                  className="rounded-lg w-20 h-20 xl:w-24 xl:h-24"
+                  className="rounded-lg w-32 h-32 xl:w-40 xl:h-40"
                 />
               </div>
           </div>
@@ -1407,7 +1353,7 @@ function IndexPage(
               connectModal={{
                 size: "wide", 
                 //size: "compact",
-                titleIcon: "https://uma.tips/icon-kcbc.jpeg",                           
+                titleIcon: "https://damoa-wallet.vercel.app/icon-kcbc.jpeg",                           
                 showThirdwebBranding: false,
               }}
 
@@ -1586,7 +1532,7 @@ function IndexPage(
                 ">
                 {/* KCT logo */}
                 <Image
-                  src="/logo-KCT.png"
+                  src="/logo-kct.jpeg"
                   alt="KCT"
                   width={35}
                   height={35}
@@ -1685,7 +1631,7 @@ function IndexPage(
 
         {/* nft collection */}
         {/* owned nfts */}
-        {address && (
+        {address && false && (
 
 
           <div className="mt-5 w-full flex flex-col gap-0 items-center justify-between">
@@ -1988,7 +1934,7 @@ function IndexPage(
             <div className="w-full fixed bottom-0 left-0 right-0 items-center justify-center">
 
 
-              <div className="w-full grid grid-cols-4 gap-0 justify-center items-center p-0
+              <div className="w-full grid grid-cols-3 gap-0 justify-center items-center p-0
                 bg-zinc-100 rounded-lg text-center
               ">
 
@@ -2026,6 +1972,7 @@ function IndexPage(
                 </button>
 
                 {/* NFT 상점 */}
+                {/*
                 <button
                   onClick={() => {
                     router.push(
@@ -2051,12 +1998,15 @@ function IndexPage(
                     NFT 상점
                   </p>
                 </button>
+                */}
+
+                {/* NFT 상점 */}
 
                 {/* 친구 초대 */}
                 <button
                   onClick={() => {
                     router.push(
-                      "/" + params.lang + "/" + params.chain + "/affiliation-snowball"
+                      "/" + params.lang + "/" + params.chain + "/affiliation-kcbc"
                       + "?start=" + start
                     );
                   }}
