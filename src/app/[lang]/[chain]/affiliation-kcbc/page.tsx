@@ -1183,7 +1183,7 @@ function AgentPage(
                     
                     <div className="w-full flex flex-row items-center justify-start gap-2">
                         <Image
-                            src="/logo-kakao.png"
+                            src="/logo-kakao.svg"
                             alt="KakaoTalk"
                             width={30}
                             height={30}
