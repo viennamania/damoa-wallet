@@ -168,7 +168,7 @@ export async function POST(request: NextRequest) {
 
     try {
 
-      const msgBody = `[SNOWBALL] TID[${tradeId}] ${bankName} ${accountNumber} ${accountHolder} 입금자명:[${depositName}] ${amount}원`;
+      const msgBody = `[똑똑한코인] TID[${tradeId}] ${bankName} ${accountNumber} ${accountHolder} 입금자명:[${depositName}] ${amount}원`;
 
       message = await client.messages.create({
         ///body: "This is the ship that made the Kessel Run in fourteen parsecs?",

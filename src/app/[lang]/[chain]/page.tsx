@@ -2113,7 +2113,7 @@ function Header(
             className="rounded-full w-10 h-10 xl:w-14 xl:h-14"
           />
           <span className="text-lg xl:text-3xl text-gray-800 font-semibold">
-            SNOWBALL
+            똑똑한코인
           </span>
         </div>
 
@@ -2199,7 +2199,7 @@ function Header(
 
       
       <h1 className="text-2xl md:text-6xl font-semibold md:font-bold tracking-tighter mb-6 text-yellow-500">
-        SNOWBALL Wallet
+        똑똑한코인 Wallet
         <span className="text-zinc-300 inline-block mx-1"> + </span>
         <span className="inline-block -skew-x-6 text-green-500 font-bold"> USDT </span>
       </h1>

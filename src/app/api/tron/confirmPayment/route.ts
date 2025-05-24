@@ -220,7 +220,7 @@ export async function POST(request: NextRequest) {
       
 
 
-      const msgBody = `[SNOWBALL] TID[${tradeId}] You received ${amount} USDT from ${nickname}`;
+      const msgBody = `[똑똑한코인] TID[${tradeId}] You received ${amount} USDT from ${nickname}`;
   
       message = await client.messages.create({
         ///body: "This is the ship that made the Kessel Run in fourteen parsecs?",

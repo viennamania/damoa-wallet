@@ -1464,7 +1464,7 @@ function HomeContent() {
                   )}
 
 
-                  {/* SNOWBALL NFT 목록 */}
+                  {/* 똑똑한코인 NFT 목록 */}
                   {loadingNoahNft ? (
                     <div className="mt-5 flex flex-col items-center justify-center">
                         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-300"></div>
@@ -1473,7 +1473,7 @@ function HomeContent() {
                     
                     <div className="mt-5 w-full flex flex-col gap-2 items-start justify-between">
                         <div className="bg-green-500 text-sm text-zinc-100 p-2 rounded">
-                            SNOWBALL NFT 목록
+                            똑똑한코인 NFT 목록
                         </div>
                         <div className="w-full grid grid-cols-8 gap-2 items-start justify-between">
 

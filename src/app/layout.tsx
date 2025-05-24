@@ -97,7 +97,7 @@ export default function RootLayout({
 
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>SNOWBALL</title>
+        <title>똑똑한코인</title>
         <meta name="description" content="눈덩이처럼 불어나는 나의 자산" />
         <link rel="icon" href="/favicon.ico" />
 

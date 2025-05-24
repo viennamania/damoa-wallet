@@ -2020,7 +2020,7 @@ export default function AIPage({ params }: any) {
             if (item.center === 'ppump') {
                 market = 'PPUMP';
             } else if (item.center === 'owin') {
-                market = 'SNOWBALL';
+                market = '똑똑한코인';
             } else if (item.center === 'exms') {
                 market = 'EXMS';
             }
@@ -2029,13 +2029,13 @@ export default function AIPage({ params }: any) {
             let marketingCenter = "";
 
             // if slice(0, 5) = "ppump" => "PPUMP"
-            // if slice(0, 4) = "owin" => "SNOWBALL"
+            // if slice(0, 4) = "owin" => "똑똑한코인"
             // if slice(0, 4) = "exms" => "EXMS"
 
             if (item.center?.slice(0, 5) === "ppump") {
                 marketingCenter = "PPUMP";
             } else if (item.center?.slice(0, 4) === "owin") {
-                marketingCenter = "SNOWBALL";
+                marketingCenter = "똑똑한코인";
             } else if (item.center?.slice(0, 4) === "exms") {
                 marketingCenter = "EXMS";
             }
@@ -2502,7 +2502,7 @@ export default function AIPage({ params }: any) {
                                             handleMarketingCenter("owin");
                                         }}
                                     />
-                                    <label htmlFor="owin">SNOWBALL</label>
+                                    <label htmlFor="owin">똑똑한코인</label>
                                 </div>
                                 <div className='flex flex-row items-center gap-2'>
                                     <input
