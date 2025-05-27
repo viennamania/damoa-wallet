@@ -55,6 +55,26 @@ import { getDictionary } from "../../../dictionaries";
 
 import { useQRCode } from 'next-qrcode';
 
+import {
+  Scanner,
+  useDevices,
+  outline,
+  boundingBox,
+  centerText,
+} from "@yudiel/react-qr-scanner";
+
+const styles = {
+  container: {
+    width: 400,
+    margin: "auto",
+  },
+  controls: {
+    marginBottom: 8,
+  },
+};
+
+
+
 
 
 
@@ -104,6 +124,97 @@ import { TronWeb, utils as TronWebUtils, Trx, TransactionBuilder, Contract, Even
 
 
 export default function SendUsdt({ params }: any) {
+
+
+  const [recipient, setRecipient] = useState({
+    _id: '',
+    id: 0,
+    email: '',
+    nickname: '',
+    avatar: '',
+    mobile: '',
+    walletAddress: '',
+    tronWalletAddress: '',
+    createdAt: '',
+    settlementAmountOfFee: '',
+  });
+
+
+
+  const [deviceId, setDeviceId] = useState<string | undefined>(undefined);
+  const [tracker, setTracker] = useState<string | undefined>("centerText");
+  const [pause, setPause] = useState(false);
+
+  const devices = useDevices();
+
+  function getTracker() {
+    switch (tracker) {
+      case "outline":
+        return outline;
+      case "boundingBox":
+        return boundingBox;
+      case "centerText":
+        return centerText;
+      default:
+        return undefined;
+    }
+  }
+
+  const handleScan = async (data: string) => {
+    setPause(true);
+
+    /*
+    setRecipient({
+      _id: '',
+      id: 0,
+      email: '',
+      nickname: '',
+      avatar: '',
+      mobile: '',
+      walletAddress: data,
+      tronWalletAddress: '',
+      createdAt: '',
+      settlementAmountOfFee: '',
+    });
+    */
+    setRecipient({
+      ...recipient,
+      walletAddress: data,
+    })
+
+    // close scanner
+    setShowQrScanner(false);
+
+    /*
+    try {
+
+      const response = await fetch(
+        `your-api-url?code=${encodeURIComponent(data)}`
+      );
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        alert("Success! Welcome to the conference.");
+      } else {
+        alert(result.message);
+      }
+
+
+    } catch (error: unknown) {
+      console.log(error);
+    } finally {
+      setPause(false);
+    }
+    */
+
+  };
+
+
+
+
+
+
+
 
 
   //console.log("params", params);
@@ -163,7 +274,17 @@ export default function SendUsdt({ params }: any) {
 
 
 
+
+  
+
+
+
   const { Canvas } = useQRCode();
+
+
+
+
+
 
 
 
@@ -290,6 +411,7 @@ export default function SendUsdt({ params }: any) {
 
     // get the balance
     const getBalance = async () => {
+      if (!address || !contract) return;
 
       ///console.log('getBalance address', address);
 
@@ -329,10 +451,10 @@ export default function SendUsdt({ params }: any) {
 
     };
 
-    if (address) getBalance();
+    if (address && contract) getBalance();
 
     const interval = setInterval(() => {
-      if (address) getBalance();
+      if (address && contract) getBalance();
     } , 1000);
 
     return () => clearInterval(interval);
@@ -511,18 +633,7 @@ export default function SendUsdt({ params }: any) {
 
 
 
-  const [recipient, setRecipient] = useState({
-    _id: '',
-    id: 0,
-    email: '',
-    nickname: '',
-    avatar: '',
-    mobile: '',
-    walletAddress: '',
-    tronWalletAddress: '',
-    createdAt: '',
-    settlementAmountOfFee: '',
-  });
+
 
 
 
@@ -1055,6 +1166,8 @@ export default function SendUsdt({ params }: any) {
 
   
 
+  // toggle qr scanner
+  const [showQrScanner, setShowQrScanner] = useState(false);
 
 
 
@@ -1579,6 +1692,96 @@ export default function SendUsdt({ params }: any) {
 
                           </>
                         )}
+
+
+
+                        {/* qr scanner button */}
+                        <div className="w-full flex flex-row gap-2 items-center justify-center">
+                          <button
+                            disabled={sending}
+                            onClick={() => setShowQrScanner(!showQrScanner)}
+                            className="w-full p-2 rounded-lg text-sm font-semibold bg-gray-300 text-gray-400"
+                          >
+                            {showQrScanner ? 'Close QR Scanner' : 'Open QR Scanner'}
+                          </button>
+                        </div>
+
+                        { showQrScanner && (
+
+
+                          <div className="w-full flex flex-col items-center justify-center gap-2">
+                            {/*
+                            <div style={styles.controls}>
+                              <select onChange={(e) => setDeviceId(e.target.value)}>
+                                <option value={undefined}>Select a device</option>
+                                {devices.map((device, index) => (
+                                  <option key={index} value={device.deviceId}>
+                                    {device.label}
+                                  </option>
+                                ))}
+                              </select>
+                              <select
+                                style={{ marginLeft: 5 }}
+                                onChange={(e) => setTracker(e.target.value)}
+                              >
+                                <option value="centerText">Center Text</option>
+                                <option value="outline">Outline</option>
+                                <option value="boundingBox">Bounding Box</option>
+                                <option value={undefined}>No Tracker</option>
+                              </select>
+                            </div>
+                            */}
+                            <Scanner
+                              formats={[
+                                "qr_code",
+                                "micro_qr_code",
+                                "rm_qr_code",
+                                "maxi_code",
+                                "pdf417",
+                                "aztec",
+                                "data_matrix",
+                                "matrix_codes",
+                                "dx_film_edge",
+                                "databar",
+                                "databar_expanded",
+                                "codabar",
+                                "code_39",
+                                "code_93",
+                                "code_128",
+                                "ean_8",
+                                "ean_13",
+                                "itf",
+                                "linear_codes",
+                                "upc_a",
+                                "upc_e",
+                              ]}
+                              constraints={{
+                                deviceId: deviceId,
+                              }}
+                              onScan={(detectedCodes) => {
+                                handleScan(detectedCodes[0].rawValue);
+                              }}
+                              onError={(error) => {
+                                console.log(`onError: ${error}'`);
+                              }}
+                              styles={{ container: { height: "400px", width: "350px" } }}
+                              components={{
+                                onOff: true,
+                                torch: true,
+                                zoom: true,
+                                finder: true,
+                                tracker: getTracker(),
+                              }}
+                              allowMultiple={true}
+                              scanDelay={2000}
+                              paused={pause}
+                            />
+                          </div>
+
+
+                        )}
+
+
 
 
 

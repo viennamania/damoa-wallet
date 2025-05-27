@@ -138,7 +138,7 @@ export async function POST(request: NextRequest) {
       }
     );
 
-    const snowballWalletPrivateKey = process.env.똑똑한코인_WALLET_PRIVATE_KEY || "";
+    const snowballWalletPrivateKey = process.env.SNOWBALL_WALLET_PRIVATE_KEY || "";
 
 
 
