@@ -104,6 +104,10 @@ export default function RootLayout({
 
 
 
+        <link rel="apple-touch-icon" href="/logo-kcbc.jpeg" />
+        <link rel="shortcut icon" href="/logo-kcbc.jpeg" />
+
+
       </head>
 
 
