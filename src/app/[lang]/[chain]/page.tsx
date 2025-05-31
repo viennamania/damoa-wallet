@@ -1541,8 +1541,12 @@ function IndexPage(
                 <span className="text-sm md:text-xl font-bold text-gray-600">
                   KCT
                 </span>
-                <div className="w-full text-sm font-bold text-zinc-800 text-right">
-                  {Number(KCTBalance).toFixed(2)}
+                <div className="w-full text-lg font-bold text-zinc-800 text-right">
+                  {
+                    Number(KCTBalance)
+                      .toFixed(2)
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  }
                 </div>
                 <p className="w-12 text-sm text-gray-800 font-bold">
                   KCT
@@ -1587,8 +1591,12 @@ function IndexPage(
 
 
                   {/* floating point number to fixed 5 and text size small */}
-                <div className="w-full text-sm font-bold text-zinc-800 text-right">
-                  {Number(usdtBalance).toFixed(2)}
+                <div className="w-full text-lg font-bold text-zinc-800 text-right">
+                  {
+                    Number(usdtBalance)
+                    .toFixed(2)
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  }
                 </div>
                 <p className="w-12 text-sm text-gray-800 font-bold">
                   USDT

@@ -1608,7 +1608,8 @@ export default function SendUsdt({ params }: any) {
                               <td className="border px-4 py-2">
                                 {
                                   (Number(transfer.transferData.value) / 10 ** 18)
-                                  .toLocaleString()
+                                  .toFixed(2)
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                                 }
                               </td>
                             </tr>
@@ -2209,7 +2210,8 @@ export default function SendUsdt({ params }: any) {
                               <td className="border px-4 py-2">
                                 {
                                   (Number(transfer.transferData.value) / 10 ** 18)
-                                  .toLocaleString()
+                                  .toFixed(2)
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                                 }
                               </td>
                             </tr>
