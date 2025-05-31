@@ -1280,9 +1280,24 @@ export default function SendUsdt({ params }: any) {
 
       setLoadingTransferListKCT(false);
     };
+
+
     if (address) {
       getTransferListKCT();
     }
+
+    // setInterval to refresh transfer list every 5 seconds
+    const interval = setInterval(() => {
+      if (address) {
+        getTransferListKCT();
+      }
+    }
+    , 5000);
+    return () => {
+      clearInterval(interval);
+    };
+
+
   }, [address]);
 
 
