@@ -190,15 +190,12 @@ export async function getTransferByWalletAddress(data: any) {
     .toArray();
 
     // totalTransfers
-    const totalTransfers = await collectionUserTransfers
-    .find({ "user.walletAddress": data.walletAddress })
-    .count();
-
+    const totalCount = await collectionUserTransfers.countDocuments({ "user.walletAddress": data.walletAddress });
 
 
     return {
         transfers: userTransfers,
-        totalTransfers: totalTransfers,
+        totalCount: totalCount,
     }
 
 }
