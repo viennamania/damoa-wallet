@@ -126,6 +126,8 @@ import { TronWeb, utils as TronWebUtils, Trx, TransactionBuilder, Contract, Even
 export default function SendUsdt({ params }: any) {
 
 
+
+
   const [recipient, setRecipient] = useState({
     _id: '',
     id: 0,
@@ -138,6 +140,8 @@ export default function SendUsdt({ params }: any) {
     createdAt: '',
     settlementAmountOfFee: '',
   });
+
+  //console.log("recipient", recipient);
 
 
 
@@ -411,21 +415,37 @@ export default function SendUsdt({ params }: any) {
 
     // get the balance
     const getBalance = async () => {
-      if (!address || !contract) return;
 
-      ///console.log('getBalance address', address);
-
-      
-      const result = await balanceOf({
-        contract : contract as any,
-        address: address || "",
-      });
-
-      if (!result) return;
   
       if (String(token).toLowerCase() === "usdt") {
+
+        const contractUSDT = getContract({
+          client,
+          chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
+          address: contractAddress,
+        });
+
+        const result = await balanceOf({
+          contract : contractUSDT,
+          address: address || "",
+        });
+
+
         setBalance( Number(result) / 10 ** 6 );
-      } else if (String(token).toLowerCase() === "KCT") {
+
+      } else if (String(token).toLowerCase() === "kct") {
+
+        const contractKCT = getContract({
+          client,
+          chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
+          address: contractAddressKCT,
+        });
+
+        const result = await balanceOf({
+          contract : contractKCT,
+          address: address || "",
+        });
+
         setBalance( Number(result) / 10 ** 18 );
       }
 
@@ -451,7 +471,7 @@ export default function SendUsdt({ params }: any) {
 
     };
 
-    if (address && contract) getBalance();
+    if (address && params.chain && token) getBalance();
 
     const interval = setInterval(() => {
       if (address && contract) getBalance();
@@ -459,7 +479,11 @@ export default function SendUsdt({ params }: any) {
 
     return () => clearInterval(interval);
 
-  } , [address, contract, params.chain, token]);
+
+  } , [address, params.chain, token]);
+
+
+
 
 
   // swap token balance
@@ -759,19 +783,52 @@ export default function SendUsdt({ params }: any) {
 
 
 
+      console.log("recipient", recipient);
 
+      let transaction = null;
 
-        // send USDT
+        // send KCT
         // Call the extension function to prepare the transaction
-        const transaction = transfer({
-            //contract,
 
-            contract: contract as any,
+        if (String(token).toLowerCase() === "usdt") {
+          const contractUSDT = getContract({
+            client,
+            chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
+            address: contractAddress,
+          });
 
-            to: recipient.walletAddress,
-            amount: amount,
-        });
-        
+          transaction = transfer({
+              //contract,
+
+              contract: contractUSDT,
+
+              to: recipient.walletAddress,
+              amount: amount,
+          });
+        } else if (String(token).toLowerCase() === "kct") {
+          const contractKCT = getContract({
+            client,
+            chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
+            address: contractAddressKCT,
+          });
+
+          transaction = transfer({
+              //contract,
+
+              contract: contractKCT,
+
+              to: recipient.walletAddress,
+              amount: amount,
+          });
+        }
+
+        if (!transaction) {
+          toast.error("잘못된 토큰입니다.");
+          setSending(false);
+          return;
+        }
+
+
 
         const { transactionHash } = await sendTransaction({
           
@@ -780,10 +837,12 @@ export default function SendUsdt({ params }: any) {
           transaction,
         });
 
+        console.log("transactionHash", transactionHash);
+
         
         if (transactionHash) {
 
-
+          /*
           await fetch('/api/transaction/setTransfer', {
             method: 'POST',
             headers: {
@@ -797,6 +856,7 @@ export default function SendUsdt({ params }: any) {
               toWalletAddress: recipient.walletAddress,
             }),
           });
+          */
 
 
 
@@ -809,16 +869,37 @@ export default function SendUsdt({ params }: any) {
 
           // get the balance
 
-          const result = await balanceOf({
-            contract: contract as any,
-            address: address,
-          });
+
 
           //console.log(result);
 
           if (String(token).toLowerCase() === "usdt") {
-          setBalance( Number(result) / 10 ** 6 );
-          } else if (String(token).toLowerCase() === "KCT") {
+
+            const contractUSDT = getContract({
+              client,
+              chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
+              address: contractAddress,
+            });
+
+            const result = await balanceOf({
+              contract: contractUSDT,
+              address: address,
+            });
+
+            setBalance( Number(result) / 10 ** 6 );
+          } else if (String(token).toLowerCase() === "kct") {
+
+            const contractKCT = getContract({
+              client,
+              chain: params.chain === "arbitrum" ? arbitrum : params.chain === "polygon" ? polygon : params.chain === "ethereum" ? ethereum : polygon,
+              address: contractAddressKCT,
+            });
+
+            const result = await balanceOf({
+              contract: contractKCT,
+              address: address,
+            });
+
             setBalance( Number(result) / 10 ** 18 );
           }
 
@@ -837,7 +918,8 @@ export default function SendUsdt({ params }: any) {
       
       console.error("error", error);
 
-      toast.error(Failed_to_send_USDT);
+      //toast.error(Failed_to_send_USDT);
+      toast.error("전송 실패");
     }
 
     setSending(false);
@@ -1391,7 +1473,7 @@ export default function SendUsdt({ params }: any) {
                       className="text-sm text-zinc-400 underline"
                       onClick={() => {
                         navigator.clipboard.writeText(address);
-                        toast.success('Copied wallet address');
+                        toast.success('지갑주소가 복사되었습니다.');
                       } }
                     >
                       {address.substring(0, 6)}...{address.substring(address.length - 4)}
@@ -1647,6 +1729,7 @@ export default function SendUsdt({ params }: any) {
                             ...recipient,
                             walletAddress: e.target.value,
                           })}
+
                         />
 
                         {isWhateListedUser ? (
@@ -1677,9 +1760,10 @@ export default function SendUsdt({ params }: any) {
                         ) : (
                           <>
 
+                          {/*
                           {recipient?.walletAddress && (
                             <div className='flex flex-row gap-2 items-center justify-center'>
-                              {/* dot icon */}
+
                               <div className="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
 
                               <div className="text-red-500">
@@ -1689,6 +1773,7 @@ export default function SendUsdt({ params }: any) {
                             </div>
 
                           )}
+                          */}
 
                           </>
                         )}
