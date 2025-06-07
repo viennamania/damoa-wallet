@@ -475,6 +475,22 @@ function HomeContent() {
 
           setLoadingUsers(false);
 
+
+
+          /*
+          data.result.users.forEach(async (user: any) => {
+
+            const result = await balanceOf({
+              contract: contractKCT,
+              address: user.walletAddress,
+            });
+
+            //console.log("user balance KCT", result);
+            user.balanceKCT = Number(result) / 10 ** 18;
+          }  );
+          */
+
+
       };
 
       if (address) {
@@ -482,6 +498,43 @@ function HomeContent() {
       }
 
   }, [address ]);
+
+
+  //console.log("users", users);
+
+
+
+  // get KCT balance of each user
+  const getKCTBalanceOfUserWalletAddress = async (walletAddress: string) => {
+      if (!walletAddress) {
+          return 0;
+      }
+
+      const result = await balanceOf({
+          contract: contractKCT,
+          address: walletAddress,
+      });
+
+      console.log("user balance KCT", result);
+
+      const balance = Number(result) / 10 ** 18;
+
+      setUsers((prevUsers) =>
+        prevUsers.map((user) => {
+          if (user.walletAddress === walletAddress) {
+            return {
+              ...user,
+              balanceKCT: balance,
+            };
+          }
+          return user;
+        })
+      );
+
+  }
+
+
+
 
 
   // airDrop
@@ -731,6 +784,9 @@ function HomeContent() {
 
  
 
+
+ 
+
   
   return (
 
@@ -796,7 +852,7 @@ function HomeContent() {
 
             {address && (
                 <div className="w-full flex items-center justify-between gap-5">
-
+                    {/*
                     <div className="flex flex-row gap-2
                     bg-zinc-800 bg-opacity-90
                     p-4 rounded-lg
@@ -808,15 +864,16 @@ function HomeContent() {
                             {shortenAddress(address)}
                         </span>
                     </div>
+                    */}
                     <div className="flex flex-col gap-2">
   
                         <button
                             onClick={() => {
                                 confirm("지갑 연결을 해제하시겠습니까?") && activeWallet?.disconnect();
                             }}
-                            className="bg-zinc-800 text-white p-2 rounded-lg"
+                            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors duration-200"
                         >
-                        지갑 연결 해제
+                        로그아웃
                         </button>
                     </div>
 
@@ -862,7 +919,7 @@ function HomeContent() {
           {/* claim wallet address and balance */}
           <div className="w-full flex flex-row gap-2 items-start justify-between">
 
-            <div className="flex flex-row gap-2 items-center justify-start">
+            <div className="hidden flex flex-row gap-2 items-center justify-start">
               {/* dot */}
               <div className="w-2 h-2 bg-green-500 rounded"></div>
               <span className="text-sm text-gray-800 font-semibold">
@@ -888,11 +945,12 @@ function HomeContent() {
               </button>
             </div>
 
+            {/*
+
             {address && !loadingUsers && (
 
               <div className="flex flex-row gap-2 items-center justify-between">
 
-                {/* 회원수 */}
                 <span className="text-lg text-gray-800 font-semibold bg-gray-100 p-2 rounded">
                   잔고: {claimWalletBalance} USDT
                 </span>
@@ -900,6 +958,7 @@ function HomeContent() {
               </div>
 
             )}
+            */}
           </div>
 
 
@@ -909,7 +968,7 @@ function HomeContent() {
               {/* dot */}
               <div className="w-2 h-2 bg-green-500 rounded"></div>
               <span className="text-sm text-gray-800 font-semibold">
-                  회원 목록
+                  똑똑한 코인 회원 목록
               </span>
             </div>
 
@@ -980,6 +1039,21 @@ function HomeContent() {
                       setUsers(data.result.users);
 
                       setLoadingUsers(false);
+
+                      /*
+                      data.result.users.forEach(async (user: any) => {
+
+                        const result = await balanceOf({
+                          contract: contractKCT,
+                          address: user.walletAddress,
+                        });
+
+                        //console.log("user balance KCT", result);
+                        user.balanceKCT = Number(result) / 10 ** 18;
+                      }  );
+                      */
+
+
 
                     };
 
@@ -1096,10 +1170,13 @@ function HomeContent() {
                                 <th className="p-2">회원아이디</th>
                                 <th className="p-2">등록일</th>
                                 <th className="p-2">지갑주소</th>
+                                <th className="p-2">KCT 잔액</th>
+                                {/*
                                 <th className="p-2">레퍼럴코드</th>
                                 <th className="p-2">센터장</th>
                                 <th className="p-2">자산 읽어오기</th>
                                 <th className="p-2">보상내역</th>
+                                */}
                                 
                             </tr>
                         </thead>
@@ -1190,14 +1267,31 @@ function HomeContent() {
                                       
                                     </td>
 
+                                    <td className="p-2">
+                                      <div className="flex flex-row gap-2 items-center justify-start">
+                                        <button
+                                          onClick={() => {
+                                            getKCTBalanceOfUserWalletAddress(user?.walletAddress);
+                                          }}
+                                          className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 transition-colors duration-200"
+                                        >
+                                          잔액 읽어오기
+                                        </button>
+                                        {/* KCT balance */}
+                                        <span className="text-sm">
+                                          {user?.balanceKCT ? Number(user?.balanceKCT).toLocaleString() : "0.00"}
+                                        </span>
+                                      </div>
+                                    </td>
 
+
+                                    {/*
                                     <td className="p-2">
 
-                                      
                                       <div className="flex flex-row gap-2 items-center justify-start">
                                         <span className="text-sm">
                                           
-                                          {/*user?.start?.slice(0, 6) + "..." + user?.start?.slice(-6)*/}
+
                                           {user?.start?.split("_")[1]}
 
                                         </span>
@@ -1214,8 +1308,7 @@ function HomeContent() {
                                         >
                                           복사
                                         </Button>
-                                        
-                                        {/* new window open */}
+   
                                         <Button
                                           onClick={() => {
                                             window.open(
@@ -1241,12 +1334,11 @@ function HomeContent() {
                                           </div>
                                         </Button>
                                       </div>
-                                      
-
 
                                     </td>
+                                    */}
 
-                                    
+                                    {/*
                                     <td className="p-2 text-center">
                                       {
                                         user.walletAddress === "0x2b1CEC9C587E3FCF5d45C5ef1B020D0174446222" ? (
@@ -1269,8 +1361,9 @@ function HomeContent() {
                                         )
                                       }
                                     </td>
+                                    */}
                                     
-
+                                    {/*
                                     <td className="p-2 text-center">
                                       <input
                                         type="radio"
@@ -1284,9 +1377,9 @@ function HomeContent() {
                                         className="w-4 h-4"
                                       />
                                     </td>
+                                    */}
 
-                                    {/* /kr/polygon/admin/{user?.walletAddress} */}
-                                    {/* new window open */}
+                                    {/*
                                     <td className="p-2 text-center">
 
 
@@ -1307,6 +1400,7 @@ function HomeContent() {
                                       </Button>
 
                                     </td>
+                                    */}
 
                                 </tr>
                             ))}
@@ -1335,7 +1429,7 @@ function HomeContent() {
                     <div className="w-full flex flex-col gap-2 items-start justify-between">
 
                         {/* USDT balance, KCT balance */}
-                        <div className="w-full flex flex-col gap-2 items-start justify-start">
+                        <div className="hidden w-full flex-col gap-2 items-start justify-start">
                           <div className="flex flex-row gap-2 items-center justify-start">
                             <span className="text-sm text-gray-800 font-semibold">
                                 USDT 잔고
