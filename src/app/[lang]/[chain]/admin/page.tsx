@@ -1233,7 +1233,7 @@ function HomeContent() {
                                             navigator.clipboard.writeText(user?.walletAddress);
                                             alert(`${user?.walletAddress} 복사되었습니다.`);
                                           }}
-                                          className="
+                                          className="w-16
                                             inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white
                                           "
                                         >
@@ -1273,7 +1273,9 @@ function HomeContent() {
                                           onClick={() => {
                                             getKCTBalanceOfUserWalletAddress(user?.walletAddress);
                                           }}
-                                          className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 transition-colors duration-200"
+                                          className="w-28
+                                          text-sm
+                                          bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 transition-colors duration-200"
                                         >
                                           잔액 읽어오기
                                         </button>
