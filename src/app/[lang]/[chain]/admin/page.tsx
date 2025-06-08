@@ -450,6 +450,7 @@ function HomeContent() {
                   "Content-Type": "application/json",
               },
               body: JSON.stringify({
+                  walletAddress: address,
                   limit: 100,
                   page: 1,
                   center: selectCenter,
@@ -853,6 +854,7 @@ function HomeContent() {
             {address && (
                 <div className="w-full flex items-center justify-between gap-5">
 
+
                     <div className="flex flex-col gap-2">
   
                         <button
@@ -873,27 +875,8 @@ function HomeContent() {
 
 
 
+
         
-        {/*
-        <div className="flex justify-center mb-5">
-          {address ? 
-            (
-              <> 
-                <Button
-                  onClick={() => (window as any).Telegram.WebApp.openLink(`https://polygonscan.com/address/${address}`)}
-                  className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white"
-                >
-                  내 지갑주소: {shortenAddress(address)}
-                </Button>  
-              </>
-            ) 
-          : (
-              <p className="text-sm text-zinc-400">
-                연결된 지갑이 없습니다. 지갑을 연결해 주세요.
-              </p>
-            )}      
-        </div>
-        */}
 
 
 
@@ -1009,6 +992,7 @@ function HomeContent() {
                               "Content-Type": "application/json",
                           },
                           body: JSON.stringify({
+                              walletAddress: address,
                               limit: 100,
                               page: 1,
                               center: selectCenter,
