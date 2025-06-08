@@ -496,7 +496,7 @@ function HomeContent() {
       fetchData();
       
 
-  }, []);
+  }, [selectCenter, searchNickname]);
 
 
   //console.log("users", users);
@@ -1141,7 +1141,7 @@ function HomeContent() {
             <div className="w-full flex flex-col gap-2 items-start justify-between">
             
               {
-                address && (
+                true && (
               
 
                 <>          
