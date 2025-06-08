@@ -493,10 +493,11 @@ function HomeContent() {
 
       };
 
-      fetchData();
-      
+      if (address) {
+          fetchData();
+      }
 
-  }, [selectCenter, searchNickname]);
+  }, [address ]);
 
 
   //console.log("users", users);
@@ -800,7 +801,7 @@ function HomeContent() {
       <div className="py-20 w-full flex flex-col gap-10 items-center justify-center">
     
 
-          {/*
+          
           <div className="flex flex-row gap-2 items-center justify-between">
             {!address && (
 
@@ -867,7 +868,7 @@ function HomeContent() {
                 </div>
             )}
           </div>
-          */}
+          
           
 
 
@@ -1141,7 +1142,7 @@ function HomeContent() {
             <div className="w-full flex flex-col gap-2 items-start justify-between">
             
               {
-                true && (
+                address && (
               
 
                 <>          
