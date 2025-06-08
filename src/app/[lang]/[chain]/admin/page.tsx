@@ -493,11 +493,10 @@ function HomeContent() {
 
       };
 
-      if (address) {
-          fetchData();
-      }
+      fetchData();
+      
 
-  }, [address ]);
+  }, []);
 
 
   //console.log("users", users);
@@ -801,7 +800,7 @@ function HomeContent() {
       <div className="py-20 w-full flex flex-col gap-10 items-center justify-center">
     
 
-          
+          {/*
           <div className="flex flex-row gap-2 items-center justify-between">
             {!address && (
 
@@ -852,19 +851,7 @@ function HomeContent() {
 
             {address && (
                 <div className="w-full flex items-center justify-between gap-5">
-                    {/*
-                    <div className="flex flex-row gap-2
-                    bg-zinc-800 bg-opacity-90
-                    p-4 rounded-lg
-                    ">
-                        <span className="text-sm font-semibold text-gray-500">
-                            지갑주소
-                        </span>
-                        <span className="text-sm font-semibold text-gray-200">
-                            {shortenAddress(address)}
-                        </span>
-                    </div>
-                    */}
+
                     <div className="flex flex-col gap-2">
   
                         <button
@@ -880,6 +867,7 @@ function HomeContent() {
                 </div>
             )}
           </div>
+          */}
           
 
 
@@ -972,8 +960,7 @@ function HomeContent() {
               </span>
             </div>
 
-            {address && !loadingUsers && (
-
+  
               <div className="flex flex-row gap-2 items-center justify-between">
 
                 {/* 회원수 */}
@@ -983,7 +970,7 @@ function HomeContent() {
 
               </div>
 
-            )}
+      
 
 
           </div>
