@@ -32,6 +32,7 @@ export async function insertOne(data: any) {
         timestamp: data.timestamp,
     };
 
+    
 
     const client = await clientPromise;
 
